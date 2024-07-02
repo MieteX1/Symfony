@@ -16,7 +16,6 @@ class AboutMeProvider
             ];
             $i++;
         }
-
         return $transformedData;
     }
 }
