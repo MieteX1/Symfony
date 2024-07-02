@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %} | Blog</title>
+    </head>
+    <body>
+        <nav>
+           <div>
+               <a href="{{ path('app_login') }}">
+                   Zaloguj się
+               </a>
+           </div>
+            <div>
+                <a href="/">Start</a>
+                <a href="/main">Blog</a>
+                <a href="/about-me">O mnie</a>
+                <a href="{{ path('contactForm') }}">Kontakt</a>
+            </div>
+
+            <form role="search" method="GET" action="/main">
+                <input name="search" type="search" placeholder="Wyszukaj">
+                <button type="submit">Wyszukaj</button>
+            </form>
+
+        </nav>
+        {% block body %}
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            {% block modal %} {% endblock %}
+        {% endblock %}
+    </body>
+</html>

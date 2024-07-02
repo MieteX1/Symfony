@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %}Dodaj artykul{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style>
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>
+        Dodaj nowy artykul
+    </h1>
+    <div>
+        <div>
+            {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+                {{ form_widget(form) }}
+                <div></div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <script src="{{ asset('js/image-input-handler.js') }}"></script>
+{% endblock %}

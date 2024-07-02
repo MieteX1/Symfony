@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kontakt{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <h1>
+        Kontakt
+    </h1>
+    <div>
+        <div>
+            {{ form(form) }}
+        </div>
+    </div>
+
+{% endblock %}

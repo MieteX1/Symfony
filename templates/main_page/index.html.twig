@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block body %}
+
+    <h1>Strona główna</h1>
+    <h3>Najnowszy artykuł</h3>
+    <div>
+        <div>
+            {% if article %}
+            <div>
+                <div>
+                    <a href="{{ article.link }}">
+                        <h3>{{ article.title }}</h3>
+                    </a>
+                    <h6>{{ article.created }}</h6>
+                    <p>
+                        {{ article.content }}
+                    </p>
+                </div>
+                <div>
+                    {{ article.id }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
