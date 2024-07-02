@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+{% block title %}O mnie{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style>
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>O mnie</h1>
+    <div>
+        <div>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#addInfoModal">
+                Dodaj pole
+            </button>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Klucz</th>
+                        <th scope="col">Wartość</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in info %}
+                    <tr>
+                        <th scope="row">{{ item.number  }}</th>
+                        <td>{{ item.key }}</td>
+                        <td>{{ item.value }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block modal %}
+    <!-- Modal -->
+    <div id="addInfoModal" tabindex="-1" aria-labelledby="addInfoModalLabel" aria-hidden="true">
+        <div>
+            <div>
+                <div>
+                    <h1 id="addInfoModalLabel">Dodaj nowe pole</h1>
+                    <button type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div>
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
