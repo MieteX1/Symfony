@@ -17,18 +17,18 @@ class UserController extends AbstractController
     {
 
     }
-    #[Route('/api/users/me', name: 'getMe', methods: ["GET"])]
+    #[Route('/api/users/me', name: 'me', methods: ["GET"])]
     #[IsGranted("ROLE_USER")]
-    public function getMe(): JsonResponse
+    public function me(): JsonResponse
     {
         $user = $this->getUser();
         return $this->apiResponseFormatter->success($this->userService->getUserData($user));
     }
-    #[Route('/api/users/one/{id}', name: 'getOne', methods: ["GET"])]
+    #[Route('/api/users/one/{id}', name: 'one', methods: ["GET"])]
     #[IsGranted("ROLE_SHOW_USER")]
-    public function getOne(int $id): JsonResponse
+    public function one(int $id): JsonResponse
     {
-        $user = $this->userService->getOne($id);
+        $user = $this->userService->one($id);
         if ($user) {
             $data = $this->userService->getUserData($user);
             return $this->apiResponseFormatter->success($data);
@@ -36,42 +36,13 @@ class UserController extends AbstractController
             return $this->apiResponseFormatter->error("User not found");
         }
     }
-    #[Route('/api/users/all', name: 'getAll', methods: ["GET"])]
+    #[Route('/api/users/all', name: 'all', methods: ["GET"])]
     #[IsGranted("ROLE_SHOW_USERS")]
-    public function getAll(): JsonResponse
+    public function all(): JsonResponse
     {
-        $users = $this->userService->getAll();
+        $users = $this->userService->all();
         $data = array_map([$this->userService, 'getUserData'], $users);
 
         return $this->apiResponseFormatter->success($data);
     }
-    #[Route('/api/users/add', name: 'addUser', methods: ["POST"])]
-    #[IsGranted("ROLE_ADD_USER")]
-    public function addUser(Request $request): JsonResponse
-    {
-        $data = $request->toArray();
-        try {
-            $result = $this->userService->addUser($data);
-            return $this->apiResponseFormatter->success($result);
-        } catch (\Exception $e) {
-            return $this->apiResponseFormatter->error($e->getMessage());
-        }
-    }
-    #[Route('/api/users/delete/{id}', name: 'removeUser', methods: ["DELETE"])]
-    #[IsGranted("ROLE_DELETE_USER")]
-    public function removeUser(int $id): JsonResponse
-    {
-        $this->userService->removeUser($id);
-        return $this->apiResponseFormatter->success([]);
-    }
-    #[Route('/api/users/update/{id}', name: 'updateUser', methods: ["PUT"])]
-    #[IsGranted("ROLE_UPDATE_USER")]
-    public function updateUser(int $id, Request $request): JsonResponse
-    {
-        $data = $request->toArray();
-        $this->userService->updateUser($id, $data);
-
-        return $this->apiResponseFormatter->success([]);
-    }
-
 }

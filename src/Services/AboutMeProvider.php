@@ -8,7 +8,6 @@ class AboutMeProvider
         $transformedData = [];
         $i = 1;
         foreach ($data as $item) {
-
             $transformedData['info'][] = [
                 'number' => $i,
                 'key' => $item->getKey(),

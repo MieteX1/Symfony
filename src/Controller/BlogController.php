@@ -25,14 +25,14 @@ class BlogController extends AbstractController
 
     }
     #[Route('/main', name: 'blog', methods: ['GET'])]
-    public function mainPage(Request $request):Response
+    public function Blog(Request $request):Response
     {
-        $search = $request->get('search');
-        $articles = $this->articleRepository->searchArticles($search);
-        $data = $this->articleProvider->transformArticleList($articles);
+        $wyszukaj = $request->get('search');
+        $artykuly = $this->articleRepository->searchArticles($wyszukaj);
+        $data = $this->articleProvider->transformArticleList($artykuly);
         return $this->render('blog/articles.html.twig', $data);
     }
-    #[Route('/article/{id}', name: 'article', methods: ['GET'])]
+    #[Route('/article/{id}', name: 'artykul', methods: ['GET'])]
     public function article(Int $id):Response
     {
         $article = $this->articleRepository->find($id);

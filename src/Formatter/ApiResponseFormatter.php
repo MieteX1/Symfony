@@ -1,48 +1,42 @@
 <?php
 
 namespace App\Formatter;
-
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiResponseFormatter
 {
-    private mixed $data;
     private int $statusCode = Response::HTTP_OK;
     private string $message = "OK";
     private array $errors = [];
+    private mixed $data;
     private array $additionalData = [];
-
-    public function setErrors(array $errors): self
-    {
-        $this->errors = $errors;
-        return $this;
-    }
 
     public function setData(mixed $data): self
     {
         $this->data = $data;
         return $this;
     }
-
-    public function setStatusCode(int $statusCode): self
+    public function setErrors(array $errors): self
     {
-        $this->statusCode = $statusCode;
+        $this->errors = $errors;
         return $this;
     }
-
     public function setMessage(string $message): self
     {
         $this->message = $message;
         return $this;
     }
-
+    public function setStatusCode(int $statusCode): self
+    {
+        $this->statusCode = $statusCode;
+        return $this;
+    }
     public function setAdditionalData(array $additionalData): self
     {
         $this->additionalData = $additionalData;
         return $this;
     }
-
     public static function success(mixed $data = null, string $message = "OK", array $additionalData = []): JsonResponse
     {
         $formatter = new self();
@@ -52,7 +46,6 @@ class ApiResponseFormatter
             ->setAdditionalData($additionalData)
             ->format();
     }
-
     public static function error(string $message, array $errors = [], int $statusCode = Response::HTTP_BAD_REQUEST): JsonResponse
     {
         $formatter = new self();
@@ -63,7 +56,6 @@ class ApiResponseFormatter
             ->setStatusCode($statusCode)
             ->format();
     }
-
     public function format(): JsonResponse
     {
         return new JsonResponse([

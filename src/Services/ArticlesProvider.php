@@ -14,7 +14,6 @@ class ArticlesProvider
             } else {
                 $imagePath = '/img/placeholder.png';
             }
-
             $transformedArticles['articles'][] = [
                 'title' => $article->getTitle(),
                 'content' => substr($article->getContent(), 0, 80) . '...',
